@@ -1,0 +1,62 @@
+CREATE DATABASE Spotify
+
+USE Spotify
+
+CREATE TABLE Musics(
+	Id INT PRIMARY KEY IDENTITY,
+	Name NVARCHAR(100),
+	TotalSecond INT,
+	MusicViewCount INT
+	
+
+	)
+
+CREATE TABLE Albums(
+	Id INT PRIMARY KEY IDENTITY,
+	Name NVARCHAR(100),
+	Tract INT,
+	[Year] INT ,
+	Duraction INT,
+	MusicId INT CONSTRAINT FK_MusicId FOREIGN KEY REFERENCES Musics(Id)
+
+)
+
+CREATE TABLE Artists(
+	Id INT PRIMARY KEY IDENTITY,
+	Name NVARCHAR(100),
+	ListenerCount INT
+	
+)
+
+CREATE TABLE AlbumArtist(
+	Id INT PRIMARY KEY IDENTITY,
+	AlbumId INT CONSTRAINT FK_AlbumId FOREIGN KEY REFERENCES Albums(Id),
+	ArtistId INT CONSTRAINT FK_ArtistId FOREIGN KEY REFERENCES Artists(Id)
+)
+
+
+
+
+CREATE TABLE MusicArtist(
+	Id INT PRIMARY KEY IDENTITY,
+	MusicId INT CONSTRAINT FK_MusicAlbumId FOREIGN KEY REFERENCES Musics(Id),
+	ArtistId INT CONSTRAINT FK_MusicArtistId FOREIGN KEY REFERENCES Artists(Id)
+)
+
+CREATE VIEW V_GetFullMusicDetail
+AS 
+SELECT 
+
+M.Name 'Music',
+M.TotalSecond 'TotalSecond',
+A.Name 'Artist',
+Al.Name 'Album'
+
+
+FROM Music AS M 
+JOIN Artists AS A
+ON A.Id=M.Id
+JOIN Albums AS Al
+ON A.Id=Al.Id
+
+
