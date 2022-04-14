@@ -72,8 +72,8 @@ GROUP BY A.Name
 
 SELECT * FROM V_GETFULLALBUMS
 
-CREATE PROCEDURE SelectAllAlbums @ListenerCount nvarchar(50)
+CREATE PROCEDURE SelectAllAlbums @ListenerCount int
 AS
 SELECT * FROM Albums WHERE listenerCount = @ListenerCount
 GO;
-
+EXEC SelectsAllAlbums @ListenerCount=2
